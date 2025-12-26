@@ -1,0 +1,92 @@
+<!-- stacking.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Dynamic Stacking of Paragraphs</title>
+
+    <script type="text/javascript">
+        var oldTop = "p1";
+
+        function toTop(newTop) {
+            var domOld = document.getElementById(oldTop).style;
+            var domNew = document.getElementById(newTop).style;
+
+            domOld.zIndex = "0";
+            domNew.zIndex = "10";
+
+            oldTop = newTop;
+        }
+    </script>
+
+    <style type="text/css">
+        .para1 {
+            color: red;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            z-index: 0;
+            border: 2px solid;
+            background-color: pink;
+            width: 400px;
+        }
+
+        .para2 {
+            color: blue;
+            position: absolute;
+            top: 30px;
+            left: 60px;
+            z-index: 0;
+            border: 2px solid;
+            background-color: yellow;
+            width: 400px;
+        }
+
+        .para3 {
+            color: green;
+            position: absolute;
+            top: 60px;
+            left: 120px;
+            z-index: 0;
+            border: 2px solid;
+            background-color: cyan;
+            width: 400px;
+        }
+
+        .para4 {
+            color: purple;
+            position: absolute;
+            top: 90px;
+            left: 180px;
+            z-index: 0;
+            border: 2px solid;
+            background-color: lightpink;
+            width: 400px;
+        }
+    </style>
+</head>
+
+<body>
+
+<p class="para1" id="p1" onmouseover="toTop('p1');">
+    The dynamic XHTML document is a document which can be modified
+    either while it is being displayed or after it has been displayed.
+</p>
+
+<p class="para2" id="p2" onmouseover="toTop('p2');">
+    The default layout of XHTML elements flows from left to right.
+    When a row is filled, layout continues on the next line.
+</p>
+
+<p class="para3" id="p3" onmouseover="toTop('p3');">
+    Absolute positioning allows you to place an element anywhere.
+    It starts from the top-left corner of the browser window.
+</p>
+
+<p class="para4" id="p4" onmouseover="toTop('p4');">
+    Relative positioning places elements in relation to their
+    normal position within the document flow.
+</p>
+
+</body>
+</html>
