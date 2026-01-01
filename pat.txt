@@ -1,0 +1,76 @@
+Patients.xml
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="patients.xsl"?>
+
+<patients>
+    <patient>
+        <ssno>12345</ssno>
+        <name>Ramesh Kallappa Basaragi</name>
+        <age>25</age>
+        <roomno>101</roomno>
+        <insurance>HAL</insurance>
+    </patient>
+
+    <patient>
+        <ssno>54321</ssno>
+        <name>Alex Vasu Pandian</name>
+        <age>40</age>
+        <roomno>102</roomno>
+        <insurance>KRP</insurance>
+    </patient>
+
+    <patient>
+        <ssno>23451</ssno>
+        <name>Melvin James R</name>
+        <age>19</age>
+        <roomno>103</roomno>
+        <insurance>Indiranagar</insurance>
+    </patient>
+
+    <patient>
+        <ssno>34512</ssno>
+        <name>Karthik A Narayana</name>
+        <age>22</age>
+        <roomno>104</roomno>
+        <insurance>Marathahalli</insurance>
+    </patient>
+</patients>
+
+patients.xsl
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xsl:stylesheet version="1.0"
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+
+    <xsl:template match="/">
+        <html>
+            <body>
+                <h2 align="center">Patient Details</h2>
+
+                <center>
+                    <table border="1" cellpadding="5" cellspacing="0">
+                        <tr bgcolor="#9acd32">
+                            <th>SSNO</th>
+                            <th>Name</th>
+                            <th>Age</th>
+                            <th>Room No</th>
+                            <th>Insurance</th>
+                        </tr>
+
+                        <xsl:for-each select="patients/patient">
+                            <tr>
+                                <td><xsl:value-of select="ssno"/></td>
+                                <td><xsl:value-of select="name"/></td>
+                                <td><xsl:value-of select="age"/></td>
+                                <td><xsl:value-of select="roomno"/></td>
+                                <td><xsl:value-of select="insurance"/></td>
+                            </tr>
+                        </xsl:for-each>
+
+                    </table>
+                </center>
+            </body>
+        </html>
+    </xsl:template>
+
+</xsl:stylesheet>
