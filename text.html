@@ -1,0 +1,75 @@
+test.html
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Greeting Page</title>
+</head>
+<body>
+    <h2>Click the link to get greeting</h2>
+    <a href="http://localhost/chaitra/greet.php">Document</a>
+</body>
+</html>
+
+greet.php
+<?php
+include("countvisitors.php");
+
+/* Greeting strings stored as constants */
+define("GREET1", "Good Morning");
+define("GREET2", "Have a Nice Day");
+define("GREET3", "Nice to Meet You");
+define("GREET4", "Get Well Soon");
+define("GREET5", "Good Bye");
+
+/* Function to generate seed */
+function make_seed()
+{
+    list($usec, $sec) = explode(" ", microtime());
+    return (double)$sec + ((double)$usec * 1000000);
+}
+
+/* Generate random number */
+mt_srand(make_seed());
+$number = mt_rand(0, 4);
+
+/* Display random greeting */
+echo "<br/><b>Greeting:</b> ";
+
+switch ($number)
+{
+    case 0: echo GREET1; break;
+    case 1: echo GREET2; break;
+    case 2: echo GREET3; break;
+    case 3: echo GREET4; break;
+    case 4: echo GREET5; break;
+}
+?>
+
+countvisitors.php
+<?php
+$filename = "count.txt";
+
+/* If file does not exist, create it */
+if (!file_exists($filename))
+{
+    file_put_contents($filename, "count=0");
+}
+
+/* Read visitor count */
+$data = file_get_contents($filename);
+$data = explode("=", $data);
+$count = $data[1];
+
+/* Increment count */
+$count++;
+
+/* Write updated count */
+file_put_contents($filename, "count=".$count);
+
+/* Display visitor count */
+echo "<b>Total number of visitors = </b>".$count;
+?>
+
+count.txt
+count=0
