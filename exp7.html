@@ -1,0 +1,49 @@
+exp7.html
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Phone Number Validity</title>
+</head>
+<body>
+    <form method="POST" action="pattern.php">
+        <h3>Enter the data</h3>
+        <table>
+            <tr>
+                <td>User name:</td>
+                <td><input type="text" name="UName" size="30" /></td>
+            </tr>
+            <tr>
+                <td>Phone Number:</td>
+                <td><input type="text" name="Phone" placeholder="123-456-7890" /></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="submit" value="Submit" />
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
+
+pattern.php
+<?php
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+
+// Rest of your code
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $UName = isset($_POST["UName"]) ? $_POST["UName"] : '';
+    $Phone = isset($_POST["Phone"]) ? $_POST["Phone"] : '';
+
+    $pattern = "/^\d{3}-\d{3}-\d{4}$/";
+
+    if (preg_match($pattern, $Phone)) {
+        echo "<b>$UName: You have entered a valid phone number.</b><br/>";
+    } else {
+        echo "<b>The phone number is not valid. Please use format: 123-456-7890</b><br/>";
+    }
+} else {
+    echo "<b>Please submit the form from <a href='exp7.html'>here</a>.</b>";
+}
+?>
