@@ -1,0 +1,129 @@
+orderform.html
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Order Form</title>
+    <script type="text/javascript">
+        // JSON object storing item details
+        const items = [
+            { name: "400 watt light bulbs", price: 20.39 },
+            { name: "800 watt light bulbs", price: 40.20 },
+            { name: "400 watt long bulbs", price: 30.00 },
+            { name: "800 watt long life bulbs", price: 70.49 }
+        ];
+
+        // Function to dynamically populate the items
+        function loadItems() {
+            const table = document.getElementById("itemsTable");
+            for (let i = 0; i < items.length; i++) {
+                const row = table.insertRow();
+                const cell1 = row.insertCell(0);
+                const cell2 = row.insertCell(1);
+
+                cell1.innerHTML = `<input type="checkbox" name="option${i+1}" value="${items[i].name}"/> ${items[i].name} for Rs.${items[i].price}`;
+                cell2.innerHTML = `<input type="number" name="val${i+1}" size="2" min="0" value="0"/>`;
+            }
+        }
+
+        window.onload = loadItems;
+    </script>
+</head>
+
+<body>
+    <form method="POST" action="order.php">
+        <h3>Enter your data</h3>
+        <table>
+            <tr>
+                <td>Username:</td>
+                <td><input type="text" name="username" required/></td>
+            </tr>
+        </table>
+
+        <h3>Items:</h3>
+        <table id="itemsTable" border="1"></table>
+
+        <h3>Payment:</h3>
+        <input type="radio" name="payment" value="Visa" required/> Visa<br/>
+        <input type="radio" name="payment" value="MasterCard" required/> MasterCard<br/>
+        <input type="radio" name="payment" value="Discover" required/> Discover<br/><br/>
+
+        <input type="submit" value="Submit"/>
+    </form>
+</body>
+</html>
+
+order.php
+<?php
+// Get username from form
+$uname = $_POST["username"] ?? 'Guest';
+
+// Prices of items (must match the HTML JSON)
+$prices = [20.39, 40.20, 30.00, 70.49];
+
+// Initialize total
+$total = 0;
+
+// Array to store order details
+$orderDetails = [];
+
+// Loop through 4 items
+for ($i = 1; $i <= 4; $i++) {
+    // Check if item was selected
+    $itemName = $_POST["option$i"] ?? null;
+    $qty = (int)($_POST["val$i"] ?? 0);
+
+    if ($itemName && $qty > 0) {
+        $itemTotal = $qty * $prices[$i-1];
+        $orderDetails[] = [
+            'name' => $itemName,
+            'price' => $prices[$i-1],
+            'quantity' => $qty,
+            'total' => $itemTotal
+        ];
+        $total += $itemTotal;
+    }
+}
+
+// Add 13.5% VAT
+$vatRate = 13.5;
+$totalWithVAT = $total + ($total * $vatRate / 100);
+
+// Get selected payment method
+$payment = $_POST["payment"] ?? "Not selected";
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Order Summary</title>
+</head>
+<body>
+    <h2>Order Summary</h2>
+    <p><strong>Username:</strong> <?php echo htmlspecialchars($uname); ?></p>
+    <p><strong>Payment Method:</strong> <?php echo htmlspecialchars($payment); ?></p>
+
+    <?php if (!empty($orderDetails)): ?>
+    <table border="1" cellpadding="5" cellspacing="0">
+        <tr>
+            <th>Item Name</th>
+            <th>Unit Price (Rs.)</th>
+            <th>Quantity</th>
+            <th>Total (Rs.)</th>
+        </tr>
+        <?php foreach ($orderDetails as $detail): ?>
+        <tr>
+            <td><?php echo htmlspecialchars($detail['name']); ?></td>
+            <td><?php echo number_format($detail['price'], 2); ?></td>
+            <td><?php echo $detail['quantity']; ?></td>
+            <td><?php echo number_format($detail['total'], 2); ?></td>
+        </tr>
+        <?php endforeach; ?>
+    </table>
+
+    <h3>Total Bill (including VAT <?php echo $vatRate; ?>%): Rs. <?php echo number_format($totalWithVAT, 2); ?></h3>
+    <?php else: ?>
+    <p>No items were ordered.</p>
+    <?php endif; ?>
+</body>
+</html>
+
