@@ -1,36 +1,166 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-stylesheet type="text/xsl" href="patients.xsl"?>
+<?xml-stylesheet type="text/css" href="patients.css"?>
 
 <patients>
-    <patient>
-        <ssno>12345</ssno>
-        <name>Ramesh Kallappa Basaragi</name>
-        <age>25</age>
+
+    <patient id="P1">
+        <name>
+            <fname>Ramesh</fname>
+            <mname>Kallappa</mname>
+            <lname>Basaragi</lname>
+        </name>
+        <ssn>123</ssn>
+        <age>21</age>
         <roomno>101</roomno>
-        <insurance>HAL</insurance>
+
+        <insurance type="primary">
+            <memberid>201</memberid>
+            <groupno>31</groupno>
+            <address>HAL</address>
+        </insurance>
+
+        <insurance type="secondary">
+            <memberid>21</memberid>
+            <groupno>31</groupno>
+            <address>HAL</address>
+        </insurance>
+
+        <medproblem>Fever</medproblem>
+        <drugallergies>Nil</drugallergies>
     </patient>
 
-    <patient>
-        <ssno>54321</ssno>
-        <name>Alex Vasu Pandian</name>
-        <age>40</age>
+    <patient id="P2">
+        <name>
+            <fname>Ajith</fname>
+            <mname>Kumar</mname>
+            <lname>Mark</lname>
+        </name>
+        <ssn>456</ssn>
+        <age>22</age>
         <roomno>102</roomno>
-        <insurance>KRP</insurance>
+
+        <insurance type="primary">
+            <memberid>202</memberid>
+            <groupno>32</groupno>
+            <address>KPM</address>
+        </insurance>
+
+        <insurance type="secondary">
+            <memberid>22</memberid>
+            <groupno>32</groupno>
+            <address>KPM</address>
+        </insurance>
+
+        <medproblem>Fever</medproblem>
+        <drugallergies>Nil</drugallergies>
     </patient>
 
-    <patient>
-        <ssno>23451</ssno>
-        <name>Melvin James R</name>
-        <age>19</age>
+    <patient id="P3">
+        <name>
+            <fname>Alex</fname>
+            <mname>Vasu</mname>
+            <lname>Pandiyan</lname>
+        </name>
+        <ssn>789</ssn>
+        <age>23</age>
         <roomno>103</roomno>
-        <insurance>Indiranagar</insurance>
+
+        <insurance type="primary">
+            <memberid>203</memberid>
+            <groupno>33</groupno>
+            <address>FCI</address>
+        </insurance>
+
+        <insurance type="secondary">
+            <memberid>23</memberid>
+            <groupno>33</groupno>
+            <address>FCI</address>
+        </insurance>
+
+        <medproblem>Fever</medproblem>
+        <drugallergies>Nil</drugallergies>
     </patient>
 
-    <patient>
-        <ssno>34512</ssno>
-        <name>Karthik A Narayana</name>
+    <patient id="P4">
+        <name>
+            <fname>Praveen</fname>
+            <mname>OS</mname>
+            <lname>Osma</lname>
+        </name>
+        <ssn>34512</ssn>
         <age>22</age>
         <roomno>104</roomno>
-        <insurance>Marathahalli</insurance>
+
+        <insurance type="primary">
+            <memberid>176</memberid>
+            <groupno>38</groupno>
+            <address>Marathahalli</address>
+        </insurance>
+
+        <insurance type="secondary">
+            <memberid>29</memberid>
+            <groupno>61</groupno>
+            <address>Karthiknagar</address>
+        </insurance>
+
+        <medproblem>Leg Pain</medproblem>
+        <drugallergies>NIL</drugallergies>
     </patient>
+
 </patients>
+
+patients {
+    display: block;
+    font-family: Arial;
+}
+
+patient {
+    display: block;
+    border: 3px solid blue;
+    margin: 10px;
+    padding: 10px;
+}
+
+name {
+    display: block;
+    font-size: 22px;
+    font-weight: bold;
+    color: red;
+}
+
+fname, mname, lname {
+    display: inline;
+    margin-right: 5px;
+}
+
+ssn {
+    display: block;
+    color: purple;
+}
+
+age {
+    display: block;
+    color: orange;
+}
+
+roomno {
+    display: block;
+    color: green;
+}
+
+insurance {
+    display: block;
+    margin-left: 20px;
+    color: blue;
+}
+
+medproblem {
+    display: block;
+    color: darkgreen;
+}
+
+drugallergies {
+    display: block;
+    color: brown;
+}
+
