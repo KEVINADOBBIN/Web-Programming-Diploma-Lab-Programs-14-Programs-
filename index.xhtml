@@ -1,0 +1,99 @@
+index.xhtml
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>EXP-8 JSON Form</title>
+
+    <script type="text/javascript">
+        function sendData() {
+            var userData = {
+                username: document.getElementById("username").value,
+                phone: document.getElementById("phone").value,
+                email: document.getElementById("email").value
+            };
+
+            var jsonData = JSON.stringify(userData);
+
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "insert.php", true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.send(jsonData);
+
+            alert("Data sent successfully");
+        }
+    </script>
+</head>
+
+<body>
+    <h2>EXP-8 User Registration</h2>
+
+    <label>Username:</label>
+    <input type="text" id="username" /><br /><br />
+
+    <label>Phone Number:</label>
+    <input type="text" id="phone" /><br /><br />
+
+    <label>Email ID:</label>
+    <input type="text" id="email" /><br /><br />
+
+    <input type="button" value="Submit" onclick="sendData()" />
+
+    <br /><br />
+    <a href="retrieve.php">View Records</a>
+</body>
+</html>
+
+insert.php
+<?php
+$data = json_decode(file_get_contents("php://input"), true);
+
+$conn = mysqli_connect("localhost", "root", "", "ajith1");
+
+if (!$conn) {
+    die("Connection Failed");
+}
+
+$username = $data['username'];
+$phone = $data['phone'];
+$email = $data['email'];
+
+$query = "INSERT INTO exp8 (username, phone, email)
+          VALUES ('$username', '$phone', '$email')";
+
+mysqli_query($conn, $query);
+mysqli_close($conn);
+?>
+
+retrieve.php
+<?php
+$conn = mysqli_connect("localhost", "root", "", "ajith1");
+
+if (!$conn) {
+    die("Connection Failed");
+}
+
+$result = mysqli_query($conn, "SELECT * FROM exp8");
+
+echo "<h2>Stored Records</h2>";
+echo "<table border='1'>
+<tr>
+<th>ID</th>
+<th>Username</th>
+<th>Phone</th>
+<th>Email</th>
+</tr>";
+
+while ($row = mysqli_fetch_assoc($result)) {
+    echo "<tr>
+            <td>".$row['id']."</td>
+            <td>".$row['username']."</td>
+            <td>".$row['phone']."</td>
+            <td>".$row['email']."</td>
+          </tr>";
+}
+
+echo "</table>";
+mysqli_close($conn);
+?>
