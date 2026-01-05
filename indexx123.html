@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Form</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            font-family: Arial;
+            background: #f2f2f2;
+        }
+
+        form {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        table {
+            width: 100%;
+        }
+
+        td {
+            padding: 8px;
+        }
+
+        input[type="text"], input[type="email"] {
+            width: 100%;
+            padding: 6px;
+        }
+
+        input[type="submit"] {
+            padding: 10px;
+            width: 100%;
+            background: #4CAF50;
+            color: white;
+            border: none;
+        }
+
+        @media (max-width: 600px) {
+            td {
+                display: block;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<form action="NewServlet" method="get">
+<h3>Enter the Student Details</h3>
+
+<table>
+<tr>
+    <td>Reg No</td>
+    <td><input type="text" name="Regno"></td>
+</tr>
+
+<tr>
+    <td>Name</td>
+    <td><input type="text" name="Name"></td>
+</tr>
+
+<tr>
+    <td>Age</td>
+    <td><input type="text" name="Age"></td>
+</tr>
+
+<tr>
+    <td>DOB</td>
+    <td><input type="text" name="DOB"></td>
+</tr>
+
+<tr>
+    <td>Permanent Address</td>
+    <td><input type="text" name="Add1"></td>
+</tr>
+
+<tr>
+    <td>Residential Address</td>
+    <td><input type="text" name="Add2"></td>
+</tr>
+
+<tr>
+    <td>Email Address</td>
+    <td><input type="email" name="Add3"></td>
+</tr>
+
+<tr>
+    <td colspan="2">
+        <input type="submit" value="Submit">
+    </td>
+</tr>
+</table>
+
+</form>
+</body>
+</html>
